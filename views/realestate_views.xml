@@ -1,0 +1,114 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+
+    <record model="ir.ui.view" id="real_estate_tree">
+      <field name="name">real_estate list</field>
+      <field name="model">realestate.properties</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="description"/>
+
+          <field name="post_code"/>
+          <field name="exp_price" />
+          <field name="bedrooms"/>
+          <field name="facades"/>
+          <field name="garden"/>
+          <field name="garden_orient"/>
+
+          <field name="available"/>
+          <field name="selling_price"/>
+          <field name="living_area"/>
+          <field name="garage" />
+          <field name="garden_area" />
+          <field name="status" />
+
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="real_estate_form">
+      <field name="name">real_estate form</field>
+      <field name="model">realestate.properties</field>
+      <field name="arch" type="xml">
+        <form>
+          <sheet>
+            <group>
+              <field name="name"/>
+              <field name="description"/>
+            </group>
+            <group>
+              <group>
+                <field name="post_code"/>
+                <field name="exp_price" />
+                <field name="bedrooms"/>
+                <field name="facades"/>
+                <field name="garden"/>
+                <field name="garden_orient"/>
+              </group>
+              <group>
+                <field name="available"/>
+                <field name="selling_price"/>
+                <field name="living_area"/>
+                <field name="garage" />
+                <field name="garden_area" />
+                <field name="status" />
+              </group>
+            </group>
+
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="real_estate_search">
+      <field name="name">real_estate search</field>
+      <field name="model">realestate.properties</field>
+      <field name="arch" type="xml">
+        <search>
+          <field name="name"/>
+          <field name="description"/>
+
+          <field name="post_code"/>
+          <field name="exp_price" />
+          <field name="bedrooms"/>
+          <field name="facades"/>
+          <field name="garden"/>
+          <field name="garden_orient"/>
+
+          <field name="available"/>
+          <field name="selling_price"/>
+          <field name="living_area"/>
+          <field name="garage" />
+          <field name="garden_area" />
+          <field name="status" />
+
+        </search>
+      </field>
+    </record>
+
+    <!-- actions opening views on models -->
+
+    <record model="ir.actions.act_window" id="real_estate.action_window">
+      <field name="name">Properties</field>
+      <field name="res_model">realestate.properties</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Top menu item -->
+
+    <menuitem name="Real Estate" id="real_estate.menu_root"/>
+
+    <!-- menu categories -->
+
+    <menuitem name="Adertisements" id="real_estate.advertisement" parent="real_estate.menu_root"/>
+
+    <!-- actions -->
+
+    <menuitem name="Properties" id="real_estate.properties" parent="real_estate.advertisement"
+              action="real_estate.action_window"/>
+
+
+  </data>
+</odoo>
