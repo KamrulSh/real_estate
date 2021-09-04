@@ -30,6 +30,45 @@
       </field>
     </record>
 
+    <!-- This creates the Kanban View For Properties -->
+
+    <record id="real_estate_kanban" model="ir.ui.view">
+        <field name="name">real_estate kanban</field>
+        <field name="model">realestate.properties</field>
+        <field name="arch" type="xml">
+            <kanban default_order="name">
+                <field name="name"/>
+                <field name="description"/>                              
+                <field name="exp_price"/>              
+                <field name="available"/>              
+                <field name="status"/>
+                <!-- <field name="property_image" widget = "image"/> -->
+                <templates>
+                    <t t-name="kanban-box">
+                        <div t-attf-class="oe_kanban_global_click">
+                            <div class="oe_kanban_details">
+                                <ul>
+                                    <li>
+                                        <field name="name"/>
+                                    </li>
+                                    <li>
+                                        Description: <field name="description"/> 
+                                    </li>
+                                    <li>
+                                        Status: <field name="status"/>
+                                    </li>
+                                    <li>
+                                        Price: <field name="exp_price"/> 
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
     <record model="ir.ui.view" id="real_estate_form">
       <field name="name">real_estate form</field>
       <field name="model">realestate.properties</field>
@@ -97,7 +136,7 @@
     <record model="ir.actions.act_window" id="real_estate.action_window">
       <field name="name">Properties</field>
       <field name="res_model">realestate.properties</field>
-      <field name="view_mode">tree,form</field>
+      <field name="view_mode">kanban,tree,form</field>
     </record>
 
     <!-- Top menu item -->
