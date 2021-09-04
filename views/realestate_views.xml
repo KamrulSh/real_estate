@@ -25,7 +25,7 @@
           <field name="living_area"/>
           <field name="garden_area" />
           <field name="total_area" />
-
+          <field name="email_id" />
         </tree>
       </field>
     </record>
@@ -97,6 +97,7 @@
                 <field name="living_area"/>
                 <field name="garden_area" />
                 <field name="total_area" />
+                <field name="email_id" />
               </group>
             </group>
 
@@ -126,7 +127,7 @@
           <field name="garage" />
           <field name="garden_area" />
           <field name="status" />
-
+          <field name="email_id" />
         </search>
       </field>
     </record>

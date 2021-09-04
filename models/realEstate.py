@@ -1,5 +1,7 @@
+import re
+from odoo.exceptions import ValidationError
 from odoo import api, models, fields
-from datetime import datetime, timedelta
+from datetime import timedelta
 
 class RealEstate(models.Model):
     _name = 'realestate.properties'
@@ -26,8 +28,26 @@ class RealEstate(models.Model):
         ("offer_accepted", "Offer Accepted"), ("sold", "Sold"), ("canceled", "Canceled")], 
         copy=False, default="new")
 
+    email_id = fields.Char(String="Email address")
     total_area = fields.Float(compute="_compute_total", readonly=True)
 
+    # implement sql constraints
+    _sql_constraints = [
+        ('check_exp_price', 'CHECK(exp_price > 0)', 'The expected price must be strictly positive'),
+        ('check_living_area', 'CHECK(living_area > 0)', 'The living area must be positive'),
+        ('check_garden_area', 'CHECK(garden_area >= 0)', 'The garden area must be positive'),
+        ('check_unique_email', 'UNIQUE(email_id)',   "The Email must be unique")
+    ]
+    
+    # implement python constraints
+    @api.constrains('exp_price')
+    def _check_sellings_price(self):
+        for record in self:
+            if record.exp_price < record.selling_price*0.9 or record.exp_price > record.selling_price:
+                raise ValidationError(f"""The expected price cannot be lower than 90% or more then 100% of selling price. 
+                Please make sure your price is between {record.selling_price*0.9} and {record.selling_price}""")
+
+    # implement computed fields and inverse function
     @api.depends("living_area","garden_area", "selling_price", "available")
     def _compute_total(self):
         for record in self:
@@ -37,3 +57,11 @@ class RealEstate(models.Model):
     def _inverse_total(self):
         for record in self:
             record.deadline = record.available + timedelta(days=10)
+            
+    # implement email validation regex
+    @api.onchange('email_id')
+    def validate_mail(self):
+       if self.email_id:
+           match = re.match('^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$', self.email_id)
+           if match == None:
+               raise ValidationError('Not a valid E-mail ID')
