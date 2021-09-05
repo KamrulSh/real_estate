@@ -9,9 +9,10 @@
         <tree>
           <field name="name"/>
           <field name="description"/>
+          <field name="photo"/>
 
           <field name="post_code"/>
-          <field name="exp_price" />
+          <field name="expected_price" />
           <field name="bedrooms"/>
           <field name="facades"/>
           <field name="garden"/>
@@ -19,7 +20,7 @@
           <field name="garage" />
           <field name="status" />
 
-          <field name="available"/>
+          <field name="available_from"/>
           <field name="deadline"/>
           <field name="selling_price"/>
           <field name="living_area"/>
@@ -39,8 +40,8 @@
             <kanban default_order="name">
                 <field name="name"/>
                 <field name="description"/>                              
-                <field name="exp_price"/>              
-                <field name="available"/>              
+                <field name="expected_price"/>              
+                <field name="available_from"/>              
                 <field name="status"/>
                 <!-- <field name="property_image" widget = "image"/> -->
                 <templates>
@@ -58,7 +59,7 @@
                                         Status: <field name="status"/>
                                     </li>
                                     <li>
-                                        Price: <field name="exp_price"/> 
+                                        Price: <field name="expected_price"/> 
                                     </li>
                                 </ul>
                             </div>
@@ -76,31 +77,40 @@
         <form>
           <sheet>
             <group>
-              <field name="name"/>
-              <field name="description"/>
-            </group>
-            <group>
               <group>
-                <field name="post_code"/>
-                <field name="exp_price" />
-                <field name="bedrooms"/>
-                <field name="facades"/>
-                <field name="garden"/>
-                <field name="garden_orient"/>
-                <field name="garage" />
-                <field name="status" />
+                <field name="name"/>
+                <field name="description"/>
               </group>
               <group>
-                <field name="available"/>
-                <field name="deadline"/>
-                <field name="selling_price"/>
-                <field name="living_area"/>
-                <field name="garden_area" />
-                <field name="total_area" />
-                <field name="email_id" />
+                <field name="photo" widget='image' class='oe_avatar'/>
               </group>
             </group>
-
+            <notebook>
+                <page string="Description">
+                  <group>
+                    <group>
+                      <field name="post_code"/>
+                      <field name="bedrooms"/>
+                      <field name="facades"/>
+                      <field name="garden"/>
+                      <field name="garden_orient" attrs="{'invisible':[('garden', '==', False)]}" />
+                      <field name="garage" />
+                      <field name="status" />
+                      <field name="active" />
+                    </group>
+                    <group>
+                      <field name="available_from"/>
+                      <field name="deadline"/>
+                      <field name="selling_price"/>
+                      <field name="expected_price" />
+                      <field name="living_area"/>
+                      <field name="garden_area" attrs="{'invisible':[('garden', '==', False)]}" />
+                      <field name="total_area" />
+                      <field name="email_id" />
+                    </group>
+                  </group>
+                </page>
+            </notebook>
           </sheet>
         </form>
       </field>
@@ -115,19 +125,24 @@
           <field name="description"/>
 
           <field name="post_code"/>
-          <field name="exp_price" />
+          <field name="expected_price" />
           <field name="bedrooms"/>
           <field name="facades"/>
           <field name="garden"/>
           <field name="garden_orient"/>
 
-          <field name="available"/>
+          <field name="available_from"/>
           <field name="selling_price"/>
           <field name="living_area"/>
           <field name="garage" />
           <field name="garden_area" />
           <field name="status" />
           <field name="email_id" />
+          <!-- Filter -->
+          <filter string='Available properties' name='filter_by_properties' domain="['|', ('status', '=', 'new'), ('status', '=', 'offer_received')]" />
+          <!-- Group By -->
+          <filter string='Postcode' name='group_by_postcode' context='{"group_by":"post_code"}'/>
+          <filter string='Status' name='group_by_status' context='{"group_by":"status"}'/>
         </search>
       </field>
     </record>
