@@ -6,8 +6,10 @@
       <field name="name">real_estate list</field>
       <field name="model">realestate.properties</field>
       <field name="arch" type="xml">
-        <tree>
-          <field name="name"/>
+        <tree decoration-primary="status=='new'" decoration-warning="status=='offer_received'" 
+              decoration-danger="status=='sold'" decoration-success="status=='offer_accepted'" 
+              decoration-muted="status=='canceled'" >
+          <field name="name" decoration-bf="name"/>
           <field name="description"/>
           <field name="photo"/>
 
