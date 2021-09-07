@@ -150,12 +150,34 @@
       </field>
     </record>
 
+    <!-- calender view -->
+    <record id="real_estate_view_calendar" model="ir.ui.view">
+    <field name="name">real_estate calendar</field>
+    <field name="model">realestate.properties</field>
+    <field name="arch" type="xml">
+        <calendar string="Property enlisted" date_start="available_from" date_stop="deadline" event_open_popup="true" mode="month" color="name" quick_add="False">
+            <field name="name" />
+            <field name="status" />
+        </calendar>
+    </field>
+    </record>
+
+    <!-- gantt view -->
+    <record id="real_estate_view_gantt" model="ir.ui.view">
+    <field name="name">real_estate gantt</field>
+    <field name="model">realestate.properties</field>
+    <field name="arch" type="xml">
+        <gantt string="Property Gantt view" date_start="available_from" date_stop="deadline" >
+        </gantt>
+    </field>
+    </record>
+
     <!-- actions opening views on models -->
 
     <record model="ir.actions.act_window" id="real_estate.action_window">
       <field name="name">Properties</field>
       <field name="res_model">realestate.properties</field>
-      <field name="view_mode">kanban,tree,form</field>
+      <field name="view_mode">kanban,tree,form,calendar,pivot,gantt,graph</field>
     </record>
 
     <!-- Top menu item -->
