@@ -26,6 +26,7 @@
     'data': [
         # 'security/ir.model.access.csv',
         'views/realestate_views.xml',
+        'views/realestateusers_views.xml'
     ],
     # only loaded in demonstration mode
     'demo': [
