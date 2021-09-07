@@ -33,6 +33,13 @@ class RealEstate(models.Model):
     email_id = fields.Char(String="Email address", required=True)
     total_area = fields.Float(compute="_compute_total", readonly=True)
 
+    # allows to create new users from realestate (delegation inheritance)
+    # or choose old users from users
+    # as it provides transparent access to the fields of this users record.
+
+    _inherits = {'res.users':'owner_id'}
+    owner_id = fields.Many2one("res.users", string="Owner/sales person")
+
     # implement sql constraints
     _sql_constraints = [
         ('check_expected_price', 'CHECK(expected_price >= 0)', 'The expected price must be positive and greater than 0'),

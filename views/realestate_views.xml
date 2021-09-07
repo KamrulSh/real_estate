@@ -109,6 +109,7 @@
                       <field name="garden_area" attrs="{'invisible':[('garden', '==', False)]}" />
                       <field name="total_area" />
                       <field name="email_id" />
+                      <field name="owner_id" />
                     </group>
                   </group>
                 </page>
