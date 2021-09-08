@@ -3,11 +3,12 @@
     'name': "Real Estate",
 
     'summary': """
-        Short (1 phrase/line) summary of the module's purpose, used as
-        subtitle on modules listing or apps.openerp.com""",
+        A real estate module where one can add properties info 
+        for advertising purposes""",
 
     'description': """
-        Long description of module's purpose
+        A real estate module where one can add properties info 
+        for advertising purposes
     """,
 
     'author': "Shahin",
@@ -24,7 +25,7 @@
 
     # always loaded
     'data': [
-        # 'security/ir.model.access.csv',
+        'security/ir.model.access.csv',
         'views/realestate_views.xml',
         'views/realestateusers_views.xml'
     ],
