@@ -32,6 +32,7 @@ class RealEstate(models.Model):
 
     email_id = fields.Char(String="Email address", required=True)
     total_area = fields.Float(compute="_compute_total", readonly=True)
+    partner_id = fields.Many2one('res.partner', string="Partner address")
 
     # allows to create new users from realestate (delegation inheritance)
     # or choose old users from users

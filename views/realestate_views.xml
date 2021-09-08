@@ -111,6 +111,9 @@
                       <field name="email_id" />
                       <field name="owner_id" />
                     </group>
+                    <group>
+                      <field name="partner_id" />
+                    </group>
                   </group>
                 </page>
             </notebook>
@@ -172,12 +175,26 @@
     </field>
     </record>
 
+    <!-- map view -->
+    <record id="real_estate_view_maps" model="ir.ui.view">
+        <field name="name">real_estate map</field>
+        <field name="model">realestate.properties</field>
+        <field name="arch" type="xml">
+            <map res_partner="partner_id">
+                <!-- <marker-popup>
+                    <field name="name" string="Title "/>
+                    <field name="partner_id" string="Customer"/>
+                </marker-popup> -->
+            </map>
+        </field>
+    </record>
+
     <!-- actions opening views on models -->
 
     <record model="ir.actions.act_window" id="real_estate.action_window">
       <field name="name">Properties</field>
       <field name="res_model">realestate.properties</field>
-      <field name="view_mode">kanban,tree,form,calendar,pivot,gantt,graph</field>
+      <field name="view_mode">kanban,tree,form,calendar,pivot,gantt,graph,map</field>
     </record>
 
     <!-- Top menu item -->
